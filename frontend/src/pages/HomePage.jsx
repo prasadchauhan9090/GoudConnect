@@ -202,6 +202,9 @@ export default function HomePage() {
                     <div className="bg-green-100 text-green-800 text-xs px-3 py-1.5 rounded-full font-bold shadow-sm">
                       Stock: {seller.availability.stockCount} L
                     </div>
+                    <div className="mt-2 bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-md font-bold shadow-sm">
+                      ₹100 / Liter
+                    </div>
                     <div className="mt-2 flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded-lg" onClick={() => handleRateClick(seller)}>
                       <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 mr-1" />
                       <span className="font-medium text-gray-700 text-sm">{seller.rating ? seller.rating.toFixed(1) : 'New'}</span>
@@ -280,7 +283,11 @@ export default function HomePage() {
                     </select>
                   </div>
                 </div>
-                <div className="flex gap-3 mt-8 pt-4 border-t border-gray-100">
+                <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200 mt-2">
+                  <span className="font-semibold text-gray-700">Total Price:</span>
+                  <span className="text-xl font-extrabold text-primary">₹{bookingForm.quantity * 100}</span>
+                </div>
+                <div className="flex gap-3 mt-6 pt-4 border-t border-gray-100">
                   <button type="button" onClick={() => setShowModal(false)} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-50 transition">Cancel</button>
                   <button type="submit" className="flex-1 bg-primary text-white font-bold py-3 rounded-xl hover:bg-primary-dark transition shadow-lg shadow-primary/30">Confirm</button>
                 </div>
