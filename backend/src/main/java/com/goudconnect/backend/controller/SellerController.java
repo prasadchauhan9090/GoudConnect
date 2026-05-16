@@ -64,4 +64,32 @@ public class SellerController {
     public ResponseEntity<List<Seller>> getAllSellers() {
         return ResponseEntity.ok(sellerRepository.findAll());
     }
+
+    public static class RateRequest {
+        private Double rating;
+        public Double getRating() { return rating; }
+        public void setRating(Double rating) { this.rating = rating; }
+    }
+
+    @PostMapping("/{id}/rate")
+    public ResponseEntity<?> rateSeller(@PathVariable Long id, @RequestBody RateRequest request) {
+        Optional<Seller> sellerOpt = sellerRepository.findById(id);
+        if (sellerOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Seller not found"));
+        }
+        Seller seller = sellerOpt.get();
+        
+        Double currentTotal = (seller.getRating() != null ? seller.getRating() : 0.0) * (seller.getRatingCount() != null ? seller.getRatingCount() : 0);
+        Integer newCount = (seller.getRatingCount() != null ? seller.getRatingCount() : 0) + 1;
+        Double newRating = (currentTotal + request.getRating()) / newCount;
+        
+        // Round to 1 decimal place
+        newRating = Math.round(newRating * 10.0) / 10.0;
+        
+        seller.setRating(newRating);
+        seller.setRatingCount(newCount);
+        
+        sellerRepository.save(seller);
+        return ResponseEntity.ok(seller);
+    }
 }

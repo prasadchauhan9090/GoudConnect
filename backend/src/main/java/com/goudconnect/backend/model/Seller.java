@@ -18,6 +18,9 @@ public class Seller {
     private String village;
     private Double latitude;
     private Double longitude;
+    
+    private Double rating = 0.0;
+    private Integer ratingCount = 0;
 
     public Seller() {
     }
@@ -85,5 +88,21 @@ public class Seller {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(Integer ratingCount) {
+        this.ratingCount = ratingCount;
     }
 }
