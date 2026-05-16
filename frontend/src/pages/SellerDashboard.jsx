@@ -159,9 +159,12 @@ export default function SellerDashboard() {
                       {booking.pickupTime}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-sm text-gray-600 mt-2">
                     <span>📱 {booking.customerPhone}</span>
-                    <span className="font-semibold text-gray-900">{booking.quantity} Liters</span>
+                    <div className="flex items-center gap-3">
+                      <span className="font-semibold text-gray-900">{booking.quantity} Liters</span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">₹{booking.quantity * 100}</span>
+                    </div>
                   </div>
                 </div>
               ))}
