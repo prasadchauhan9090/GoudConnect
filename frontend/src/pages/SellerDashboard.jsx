@@ -23,7 +23,7 @@ export default function SellerDashboard() {
 
     const fetchData = async () => {
       try {
-        const availRes = await axios.get(`http://localhost:8080/api/availability/today/${parsedSeller.id}`);
+        const availRes = await axios.get(`/api/availability/today/${parsedSeller.id}`);
         if (availRes.data) {
           setAvailability({
             morningAvailable: availRes.data.morningAvailable,
@@ -32,7 +32,7 @@ export default function SellerDashboard() {
           });
         }
 
-        const bookingsRes = await axios.get(`http://localhost:8080/api/bookings/seller/${parsedSeller.id}`);
+        const bookingsRes = await axios.get(`/api/bookings/seller/${parsedSeller.id}`);
         setBookings(bookingsRes.data);
       } catch (err) {
         console.error("Failed to load dashboard data", err);
@@ -56,7 +56,7 @@ export default function SellerDashboard() {
     setSaving(true);
     setMessage('');
     try {
-      await axios.post('http://localhost:8080/api/availability/update', {
+      await axios.post('/api/availability/update', {
         sellerId: seller.id,
         ...availability
       });

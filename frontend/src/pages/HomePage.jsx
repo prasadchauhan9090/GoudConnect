@@ -47,8 +47,8 @@ export default function HomePage() {
 
   const fetchSellers = async () => {
     try {
-      const sellerRes = await axios.get('http://localhost:8080/api/seller/all');
-      const availRes = await axios.get('http://localhost:8080/api/availability/all-today');
+      const sellerRes = await axios.get('/api/seller/all');
+      const availRes = await axios.get('/api/availability/all-today');
       
       const merged = sellerRes.data.map(seller => {
         const availability = availRes.data.find(a => a.seller.id === seller.id);
@@ -81,7 +81,7 @@ export default function HomePage() {
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/api/bookings/create', {
+      await axios.post('/api/bookings/create', {
         sellerId: selectedSeller.id,
         ...bookingForm
       });
@@ -99,7 +99,7 @@ export default function HomePage() {
   const handleRatingSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8080/api/seller/${selectedSeller.id}/rate`, {
+      await axios.post(`/api/seller/${selectedSeller.id}/rate`, {
         rating: ratingValue
       });
       setRatingSuccess(true);
