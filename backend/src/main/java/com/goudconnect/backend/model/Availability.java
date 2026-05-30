@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Entity
@@ -21,7 +22,10 @@ public class Availability {
 
     private boolean morningAvailable;
     private boolean eveningAvailable;
+
+    @Min(value = 0, message = "Stock count cannot be negative")
     private int stockCount;
+
     private LocalDate date;
 
     public Availability() {

@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping("/api/availability")
 public class AvailabilityController {
@@ -24,9 +28,13 @@ public class AvailabilityController {
     private SellerRepository sellerRepository;
 
     public static class UpdateAvailabilityRequest {
+        @NotNull(message = "Seller ID is required")
         private Long sellerId;
+
         private boolean morningAvailable;
         private boolean eveningAvailable;
+
+        @Min(value = 0, message = "Stock count cannot be negative")
         private int stockCount;
 
         public Long getSellerId() { return sellerId; }
@@ -40,7 +48,7 @@ public class AvailabilityController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateAvailability(@RequestBody UpdateAvailabilityRequest payload) {
+    public ResponseEntity<?> updateAvailability(@Valid @RequestBody UpdateAvailabilityRequest payload) {
         Long sellerId = payload.getSellerId();
         boolean morning = payload.isMorningAvailable();
         boolean evening = payload.isEveningAvailable();

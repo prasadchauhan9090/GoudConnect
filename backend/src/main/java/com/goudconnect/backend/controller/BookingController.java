@@ -12,6 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 @RestController
 @RequestMapping("/api/bookings")
 public class BookingController {
@@ -23,10 +30,21 @@ public class BookingController {
     private SellerRepository sellerRepository;
 
     public static class CreateBookingRequest {
+        @NotBlank(message = "Customer name is required")
         private String customerName;
+
+        @NotBlank(message = "Customer phone number is required")
+        @Pattern(regexp = "^\\d{10}$", message = "Phone number must be exactly 10 digits")
         private String customerPhone;
+
+        @Min(value = 1, message = "Quantity must be at least 1")
+        @Max(value = 10, message = "Quantity cannot exceed 10")
         private int quantity;
+
+        @NotBlank(message = "Pickup time is required")
         private String pickupTime;
+
+        @NotNull(message = "Seller ID is required")
         private Long sellerId;
 
         public String getCustomerName() { return customerName; }
@@ -42,7 +60,7 @@ public class BookingController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createBooking(@RequestBody CreateBookingRequest request) {
+    public ResponseEntity<?> createBooking(@Valid @RequestBody CreateBookingRequest request) {
         Optional<Seller> sellerOpt = sellerRepository.findById(request.getSellerId());
         if (sellerOpt.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Seller not found"));

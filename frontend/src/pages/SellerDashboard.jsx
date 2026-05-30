@@ -63,7 +63,14 @@ export default function SellerDashboard() {
       setMessage('Availability updated successfully!');
       setTimeout(() => setMessage(''), 3000);
     } catch (err) {
-      setMessage('Failed to update availability.');
+      if (err.response && err.response.data && typeof err.response.data === 'object' && !err.response.data.message) {
+         const errorMsgs = Object.values(err.response.data).join(', ');
+         setMessage(`Validation error: ${errorMsgs}`);
+      } else if (err.response && err.response.data && err.response.data.message) {
+         setMessage(err.response.data.message);
+      } else {
+         setMessage('Failed to update availability.');
+      }
     } finally {
       setSaving(false);
     }

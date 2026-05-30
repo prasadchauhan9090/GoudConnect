@@ -1,6 +1,10 @@
 package com.goudconnect.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,9 +14,18 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Customer name is required")
     private String customerName;
+
+    @NotBlank(message = "Customer phone number is required")
+    @Pattern(regexp = "^\\d{10}$", message = "Phone number must be exactly 10 digits")
     private String customerPhone;
+
+    @Min(value = 1, message = "Quantity must be at least 1")
+    @Max(value = 10, message = "Quantity cannot exceed 10")
     private int quantity;
+
+    @NotBlank(message = "Pickup time is required")
     private String pickupTime;
 
     @ManyToOne

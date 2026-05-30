@@ -35,6 +35,7 @@ export default function HomePage() {
     pickupTime: 'Morning'
   });
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingErrors, setBookingErrors] = useState(null);
 
   // Rating Modal State
   const [showRatingModal, setShowRatingModal] = useState(false);
@@ -69,6 +70,7 @@ export default function HomePage() {
     setSelectedSeller(seller);
     setShowModal(true);
     setBookingSuccess(false);
+    setBookingErrors(null);
   };
 
   const handleRateClick = (seller) => {
@@ -93,6 +95,11 @@ export default function HomePage() {
       }, 2000);
     } catch (err) {
       console.error("Failed to create booking", err);
+      if (err.response && err.response.data) {
+        setBookingErrors(err.response.data);
+      } else {
+        setBookingErrors({ message: "An unexpected error occurred" });
+      }
     }
   };
 
@@ -262,6 +269,20 @@ export default function HomePage() {
               </div>
             ) : (
               <form onSubmit={handleBookingSubmit} className="space-y-5">
+                {bookingErrors && typeof bookingErrors === 'object' && !bookingErrors.message && (
+                  <div className="bg-red-50 text-red-700 p-4 rounded-xl text-sm font-medium mb-4">
+                    <ul className="list-disc pl-5">
+                      {Object.entries(bookingErrors).map(([field, msg]) => (
+                        <li key={field}>{msg}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {bookingErrors && bookingErrors.message && (
+                  <div className="bg-red-50 text-red-700 p-4 rounded-xl text-sm font-medium mb-4">
+                    {bookingErrors.message}
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Your Name</label>
                   <input type="text" required value={bookingForm.customerName} onChange={e => setBookingForm({...bookingForm, customerName: e.target.value})} className="w-full border-2 border-gray-200 rounded-xl p-3 focus:ring-0 focus:border-primary transition outline-none" placeholder="E.g. Ramesh" />

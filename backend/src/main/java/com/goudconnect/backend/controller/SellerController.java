@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/seller")
 public class SellerController {
@@ -18,7 +20,7 @@ public class SellerController {
     private SellerRepository sellerRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Seller seller) {
+    public ResponseEntity<?> register(@Valid @RequestBody Seller seller) {
         if (sellerRepository.findByPhone(seller.getPhone()).isPresent()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Phone number already registered"));
         }
