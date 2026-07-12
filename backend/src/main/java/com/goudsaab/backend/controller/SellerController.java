@@ -1,7 +1,7 @@
-package com.goudconnect.backend.controller;
+package com.goudsaab.backend.controller;
 
-import com.goudconnect.backend.model.Seller;
-import com.goudconnect.backend.repository.SellerRepository;
+import com.goudsaab.backend.model.Seller;
+import com.goudsaab.backend.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

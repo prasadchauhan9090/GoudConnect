@@ -1,4 +1,4 @@
-package com.goudconnect.backend.controller;
+package com.goudsaab.backend.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

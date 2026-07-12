@@ -1,4 +1,4 @@
-package com.goudconnect.backend.model;
+package com.goudsaab.backend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

@@ -1,4 +1,4 @@
-package com.goudconnect.backend.config;
+package com.goudsaab.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

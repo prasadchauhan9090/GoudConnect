@@ -1,7 +1,7 @@
-package com.goudconnect.backend.repository;
+package com.goudsaab.backend.repository;
 
-import com.goudconnect.backend.model.Booking;
-import com.goudconnect.backend.model.Seller;
+import com.goudsaab.backend.model.Booking;
+import com.goudsaab.backend.model.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

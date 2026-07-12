@@ -1,6 +1,6 @@
-# GoudConnect
+# GoudSaab
 
-GoudConnect is a rural marketplace platform designed for toddy sellers in Andhra Pradesh & Telangana. It digitizes the process of tracking stock availability and ordering, solving the everyday problems of availability transparency and phone call overload for local sellers.
+GoudSaab is a rural marketplace platform designed for toddy sellers in Andhra Pradesh & Telangana. It digitizes the process of tracking stock availability and ordering, solving the everyday problems of availability transparency and phone call overload for local sellers.
 
 ## 🚀 Features
 

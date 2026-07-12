@@ -1,4 +1,4 @@
-package com.goudconnect.backend.controller;
+package com.goudsaab.backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +13,6 @@ public class HealthController {
     
     @GetMapping
     public ResponseEntity<Map<String, String>> healthCheck() {
-        return ResponseEntity.ok(Map.of("status", "UP", "message", "GoudConnect API is running"));
+        return ResponseEntity.ok(Map.of("status", "UP", "message", "GoudSaab API is running"));
     }
 }

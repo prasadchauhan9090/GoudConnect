@@ -1,4 +1,4 @@
-package com.goudconnect.backend;
+package com.goudsaab.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
