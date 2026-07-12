@@ -25,19 +25,26 @@ export default function SellerLogin() {
 
     try {
       if (isLogin) {
-        const res = await axios.post('/api/seller/login', {
+        const res = await axios.post('http://localhost:8080/api/seller/login', {
           phone: formData.phone,
           password: formData.password
         });
         localStorage.setItem('seller', JSON.stringify(res.data));
         navigate('/dashboard');
       } else {
-        const res = await axios.post('/api/seller/register', formData);
+        const res = await axios.post('http://localhost:8080/api/seller/register', formData);
         localStorage.setItem('seller', JSON.stringify(res.data));
         navigate('/dashboard');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      if (err.response && err.response.data && typeof err.response.data === 'object' && !err.response.data.message) {
+         const errorMsgs = Object.values(err.response.data).join(', ');
+         setError(`Validation error: ${errorMsgs}`);
+      } else if (err.response && err.response.data && err.response.data.message) {
+         setError(err.response.data.message);
+      } else {
+         setError('An error occurred');
+      }
     } finally {
       setLoading(false);
     }

@@ -8,7 +8,7 @@ function App() {
     <div className="min-h-screen flex flex-col font-sans">
       <header className="bg-primary text-white p-4 shadow-md sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold tracking-wide">GoudConnect</h1>
+          <h1 className="text-2xl font-bold tracking-wide">GOUD SAAB</h1>
           <nav>
             <a href="/login" className="text-white hover:text-green-100 font-medium">Seller Login</a>
           </nav>
@@ -24,7 +24,7 @@ function App() {
       </main>
 
       <footer className="bg-gray-800 text-gray-300 text-center p-4 text-sm">
-        &copy; {new Date().getFullYear()} GoudConnect. Connecting local sellers with customers.
+        &copy; {new Date().getFullYear()} GOUD SAAB. Connecting local sellers with customers.
       </footer>
     </div>
   );
